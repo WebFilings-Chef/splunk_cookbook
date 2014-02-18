@@ -123,6 +123,7 @@ end
 
 template "#{node['splunk']['forwarder_home']}/etc/system/local/outputs.conf" do
 	source "forwarder/outputs.conf.erb"
+  cookbook node['splunk']['cookbook_name']  
 	owner "root"
 	group "root"
 	mode "0644"
@@ -133,6 +134,7 @@ end
 ["limits"].each do |cfg|
   template "#{node['splunk']['forwarder_home']}/etc/system/local/#{cfg}.conf" do
    	source "forwarder/#{cfg}.conf.erb"
+    cookbook node['splunk']['cookbook_name']  
    	owner "root"
    	group "root"
    	mode "0640"
@@ -143,6 +145,7 @@ end
 template "Moving inputs file for role: #{node['splunk']['forwarder_role']}" do
   path "#{node['splunk']['forwarder_home']}/etc/system/local/inputs.conf"
   source "forwarder/#{node['splunk']['forwarder_config_folder']}/#{node['splunk']['forwarder_role']}.inputs.conf.erb"
+  cookbook node['splunk']['cookbook_name']  
   owner "root"
   group "root"
   mode "0640"
@@ -152,6 +155,7 @@ end
 
 template "/etc/init.d/splunk" do
   source "forwarder/splunk.erb"
+  cookbook node['splunk']['cookbook_name']  
   mode "0755"
   owner "root"
   group "root"
